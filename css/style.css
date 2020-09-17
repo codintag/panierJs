@@ -1,0 +1,129 @@
+body {
+    width: 100%;
+    font-family: Verdana;
+}
+h1 {
+    text-align: center;
+    border-bottom: 1px solid #007bff
+}
+/* styles about my articles */
+section#ourCourses {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.card {
+    border: 1px solid #cdcdcd;
+    margin: 60px 0;
+}
+
+.img-top {
+    width: 100%
+}
+
+.reactAngularImg{
+    height: 18rem;
+}
+
+.card-body {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card-text {
+    font-size: 14px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.btn {
+    background-color: cornflowerblue;
+    color: white;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+
+/* Styles about my Panier */
+
+.tableAchat {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableRecapitulatif {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.tableRecapitulatif th, td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#panier {
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+#panier article h2{
+    text-align: center;
+}
+
+#panier article {
+    width: 100%;
+    text-align: center;
+}
+
+.imgArticlePanier {
+    width: 10rem;
+}
+
+.btnMinus, .btnPlus {
+    background-color: coral;
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px darkgray;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.btnRemoveFromCart {
+    background-color: rgb(199, 13, 13);
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 1px darkgray;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.tdArticle {
+    display: flex;
+    align-items: center;
+}
+
+.tdArticle h3 {
+    margin-left: 30px;
+}

@@ -1,0 +1,16 @@
+Panier en full HTML5, CSS3 et JavaScript Vanilla (pas de React mais si vous le souhaitez vous avez EXCEPTIONNELEMENT le droit à Bootstrap pour le front-end).
+
+Dans le panier, l’utilisateur pourra :
+Ajouter un article,
+Modifier la quantité d’un article,
+Supprimer un article quelle que soit sa quantité et prévenir le client qu’il est sur le point de le retirer du panier,
+Ajouter une réduction automatiquement dès 200€ d’achats
+ATTENTION :  si je rafraîchis la page, le panier doit garder les articles présents avant le rafraichissement. 
+
+Vous êtes libres sur le visuel de votre page ainsi que sur le nombre et le type de produits à vendre (high-tech, blu-ray, véhicule, etc.). 
+
+Pour mettre en place le panier vous devrez utiliser un fichier JSON. Chaque article devra être définit par les clés suivantes : idProduit, imageProduit, nomProduit, prixProduit)
+
+Ne tardez pas trop sur le visuel, faites uniquement en sorte que la page soit responsive.
+
+Bon courage :slight_smile:

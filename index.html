@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>TP Panier</title>
+</head>
+
+<body>
+    <h1>Pas cher ! venez !</h1>
+
+    <main>
+<!-- La section de mes articles -->
+        <section id="ourCourses"></section>
+
+        <!-- My Cart section here  -->
+        <section id="panier">
+            <!-- Panier d'achats, mes achats-->
+            <article id="achats">
+                <h2>Panier d'achats</h2>
+            </article>
+
+            <!-- récapitulatifs de ma commande -->
+            <article id="recapitulatif">
+                <h2>récapitulatifs de la commande</h2>
+                <table border="1" class="tableRecapitulatif">
+                    <tbody>
+                        <tr>
+                            <th>Nombre de produit(s) : </th>
+                            <td id="nbrProduit">0</td>
+                        </tr>
+                        <tr>
+
+                            <th>Total avant réduction :</th>
+                            <td id="totalAvantReduction">0 €</td>
+                        </tr>
+                        <tr>
+                            <th>Réduction : </th>
+                            <td id="reduction">200€ pour bénéficier des 5%</td>
+                        </tr>
+                        <tr>
+                            <th>Net à payer :</th>
+                            <td id="netaPayer">0 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+    
+    <!-- <script src="./js/script.js"></script> -->
+    <script src="./js/panier.js"></script>
+</body>
+
+</html>

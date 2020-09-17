@@ -1,0 +1,51 @@
+[
+    {
+        "nomProduit" : "HTML5",
+        "idProduit" : 1,
+        "imageProduit" : "./img/html.png",
+        "prixProduit" : 199,
+        "textProduit" : "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "quantity" : 0
+    },
+    {
+        "nomProduit" : "CSS3",
+        "idProduit" : 2,
+        "imageProduit" : "./img/css.png",
+        "prixProduit" : 199,
+        "textProduit" : "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "quantity" : 0
+    },
+    {
+        "nomProduit" : "Javascript",
+        "idProduit" : 3,
+        "imageProduit" : "./img/js.png",
+        "prixProduit" : 299,
+        "textProduit" : "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "quantity" : 0
+    },
+    {
+        "nomProduit" : "React.js",
+        "idProduit" : 4,
+        "imageProduit" : "./img/react.png",
+        "prixProduit" : 299,
+        "textProduit" : "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "quantity" : 0
+    },
+    {
+        "nomProduit" : "Angular",
+        "idProduit" : 5,
+        "imageProduit" : "img/angular.png",
+        "prixProduit" : 299,
+        "textProduit" : "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "quantity" : 0
+    },
+    {
+        "nomProduit" : "Python",
+        "idProduit" : 6,
+        "imageProduit" : "./img/python.png",
+        "prixProduit" : 299,
+        "textProduit" : "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "quantity" : 0
+    }
+    
+]

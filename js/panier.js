@@ -46,7 +46,7 @@ function loadProducts() {
                                         panierNumbers(product[i]);
                                         totalPrix(product[i]);
 
-                                        window.location.href = 'http://0.0.0.0:4507/';
+                                        window.location.href = 'https://panierjs.netlify.app/';
                                 }
                         })
 

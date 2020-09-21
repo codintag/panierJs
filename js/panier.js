@@ -43,29 +43,16 @@ function loadProducts() {
                         let dataId = buttons[i].getAttribute('data-id');
                         buttons[i].addEventListener('click', (e) => {
                                 if (dataId == product[i].idProduit) {
-
                                         panierNumbers(product[i]);
                                         totalPrix(product[i]);
-                                        loadTotalOfProducts();
 
-                                        //reduction
-                                        reductionPrix();
-
-                                        //net a payer
-                                        netaPayer(product[i]);
-
-                                        //add to cart
-                                        afficherLePanier();
-
-                                        //remove from Cart
-                                        removeFromPanier(product[i]);
-
+                                        window.location.href = 'http://0.0.0.0:4507/';
                                 }
                         })
 
                 }
 
-                // load the numbers of products
+                // load the numbers of products called at the bottom of the page. loadNumberOfProducts()
                 function loadNumberOfProducts() {
                         let productNumbers = localStorage.getItem('panierNumbers')
 
@@ -74,7 +61,7 @@ function loadProducts() {
                         }
                 }
 
-                //load the total of products
+                //load the total of products total avant reduction
                 function loadTotalOfProducts() {
                         let totalAvantReduction = document.getElementById('totalAvantReduction');
 
@@ -90,10 +77,14 @@ function loadProducts() {
                 // cart Numbers in local storage
                 let nbrProduit = document.getElementById('nbrProduit');
 
-                function panierNumbers(product) {
+                function panierNumbers(product, action) {
                         let productNumbers = localStorage.getItem('panierNumbers')
                         productNumbers = parseInt(productNumbers);
-                        if (productNumbers) {
+
+                        if (action) {
+                                localStorage.setItem('panierNumbers', productNumbers - 1);
+                                nbrProduit.textContent = productNumbers - 1;
+                        } else if (productNumbers) {
                                 localStorage.setItem('panierNumbers', productNumbers + 1);
                                 nbrProduit.textContent = productNumbers + 1;
                         } else {
@@ -132,25 +123,25 @@ function loadProducts() {
                 }
 
 
-                //total prix avant Réduction
-                function totalPrix(product) {
+                //TOTAL PRIX AVANT REDUCTION
+                function totalPrix(product, action) {
                         let totalPrix = localStorage.getItem('totalPrixProduits');
-                        if (totalPrix != null) {
+                        if (action) {
                                 totalPrix = +totalPrix;
-                                console.log(typeof totalPrix);
-                                console.log(totalPrix);
+                                localStorage.setItem("totalPrixProduits", totalPrix - product.prixProduit);
 
+                        } else if (totalPrix != null) {
+                                totalPrix = +totalPrix;
                                 console.log('totalPrixProduits is : ', totalPrix);
-
                                 localStorage.setItem('totalPrixProduits', totalPrix + product.prixProduit)
 
                         } else {
                                 localStorage.setItem('totalPrixProduits', product.prixProduit)
-
                         }
 
                 }
 
+                //REDUCTION DES PRIX DANS LE LOCALSTORAGE
                 function reductionPrix() {
                         let reduction = document.getElementById('reduction');
 
@@ -158,6 +149,7 @@ function loadProducts() {
 
                         if (totalPrix < 200) {
                                 reduction.textContent = '200€ pour bénéficier des 5%';
+                                localStorage.setItem('Reduction', 0);
 
                         } else {
                                 localStorage.setItem('Reduction', (totalPrix * 5) / 100);
@@ -167,6 +159,7 @@ function loadProducts() {
 
                 }
 
+                //NET A PAYER DANS LE LOCALSTORAGE
                 function netaPayer() {
                         let getReduction = localStorage.getItem('Reduction');
                         let totalPrix = localStorage.getItem('totalPrixProduits');
@@ -178,15 +171,16 @@ function loadProducts() {
                         // get the document id of a netapayer .
                         let netaPayer = document.getElementById('netaPayer');
                         netaPayer.textContent = getNetaPayer + ' €';
-
-
-
                 }
 
+
+                // afficher mon panier
                 function afficherLePanier() {
                         let productInPanier = localStorage.getItem('PanierOfProducts');
                         let articles = JSON.parse(productInPanier);
+
                         let totalPrix = localStorage.getItem('totalPrixProduits');
+                        totalPrix = +totalPrix
                         let achats = document.getElementById('achats');
 
                         if (articles && achats) {
@@ -206,10 +200,10 @@ function loadProducts() {
                                                 <tr>
                                                     <td class="tdArticle">
                                                         <img class="imgArticlePanier" src="${items.imageProduit}">
-                                                        <h3>${items.nomProduit}</h3>
+                                                        <h3 class=“nomDuProduit“>${items.nomProduit}</h3>
                                                     </td>
                                                     <td>
-                                                        <button class="btnMinus" data-id=“${items.idProduit}“>-</button>
+                                                        <button data-name="${items.nomProduit}" class="btnMinus" data-id=“${items.idProduit}“>-</button>
                                                         <span class="increment">${items.quantity}</span>
                                                         <button class="btnPlus">+</button>
                                                     </td>
@@ -223,6 +217,10 @@ function loadProducts() {
                                         </table>
                                     `
                                 });
+
+
+                                buttonsEffacer();
+                                gererlaQuantite();
                         }
                 }
                 //show my Cart Product
@@ -231,81 +229,115 @@ function loadProducts() {
 
                 //=============== remove an item from the Cart when button were cliked ==============================
 
-                let removeBtns = document.getElementsByClassName('btnRemoveFromCart');
+                function buttonsEffacer() {
+                        let removeBtns = document.getElementsByClassName('btnRemoveFromCart');
+                        let productNumbers = localStorage.getItem('panierNumbers');
+                        let cartCost = localStorage.getItem("totalPrixProduits");
+                        let cartItems = localStorage.getItem('PanierOfProducts');
+                        cartItems = JSON.parse(cartItems);
+                        let productName;
+                        console.log(cartItems);
 
-                function removeFromPanier() {
-
-                        let productInPanier = localStorage.getItem('PanierOfProducts');
-                        let articles = JSON.parse(productInPanier);
-                        console.log(articles);
-
-                        for (const courses in articles) {
-
-                                const element = articles[courses];
-                                console.log(element.nomProduit);
-
-                        }
-
-                        console.log(articles);
                         for (let i = 0; i < removeBtns.length; i++) {
-
-                                let dataName = removeBtns[i].getAttribute('data-name');
-
-
                                 removeBtns[i].addEventListener('click', () => {
+                                        productName = removeBtns[i].getAttribute('data-name'); //removeBtns[i].parentElement.textContent.toLocaleLowerCase().replace(/ /g, '').trim();
+
+                                        localStorage.setItem('panierNumbers', productNumbers - cartItems[productName].quantity);
+                                        localStorage.setItem('totalPrixProduits', cartCost - (cartItems[productName].prixProduit * cartItems[productName].quantity));
+
+                                        delete cartItems[productName];
+                                        localStorage.setItem('PanierOfProducts', JSON.stringify(cartItems));
+
+                                        afficherLePanier();
+                                        loadNumberOfProducts();
+                                        loadTotalOfProducts();
+                                        reductionPrix();
+                                        netaPayer();
+
+                                })
+                        }
+                }
+
+
+                // INCREASE AND DECREASE BUTTONS
+                function gererlaQuantite() {
+                        let increaseButtons = document.querySelectorAll('.btnPlus');
+                        let decreaseButtons = document.querySelectorAll('.btnMinus');
+                        let increment = document.querySelectorAll('.increment');
+                        let nomduProduit = document.querySelectorAll('.“nomDuProduit“');
+
+                        let currentQuantity = 0;
+                        let currentProduct = '';
+
+                        let produitsPanier = localStorage.getItem('PanierOfProducts');
+                        produitsPanier = JSON.parse(produitsPanier);
+
+                        for (let i = 0; i < increaseButtons.length; i++) {
+                                //décrementer via le bouton qui a la class minus
+                                decreaseButtons[i].addEventListener('click', () => {
+                                        currentQuantity = increment[i].textContent;
+                                        currentProduct = nomduProduit[i].textContent;
+
+                                        if (produitsPanier[currentProduct].quantity <= 1){
+                                                let productNumbers = localStorage.getItem('panierNumbers');
+                                                let cartCost = localStorage.getItem("totalPrixProduits");
+                                                let cartItems = localStorage.getItem('PanierOfProducts');
+                                                cartItems = JSON.parse(cartItems);
+                                                let productName;
+                                                console.log(cartItems);
+
+                                                
+                                                productName = decreaseButtons[i].getAttribute('data-name');
+
+                                                localStorage.setItem('panierNumbers', productNumbers - cartItems[productName].quantity);
+                                                localStorage.setItem('totalPrixProduits', cartCost - (cartItems[productName].prixProduit * cartItems[productName].quantity));
+
+                                                delete cartItems[productName];
+                                                localStorage.setItem('PanierOfProducts', JSON.stringify(cartItems));
+
+                                                afficherLePanier();
+                                                loadNumberOfProducts();
+                                                loadTotalOfProducts();
+                                                reductionPrix();
+                                                netaPayer();
+
+                                        
+                                        } else {
+                                                produitsPanier[currentProduct].quantity -= 1;
+                                                panierNumbers(produitsPanier[currentProduct], "decrease");
+                                                totalPrix(produitsPanier[currentProduct], "decrease");
+                                                localStorage.setItem('PanierOfProducts', JSON.stringify(produitsPanier));
+
+                                                afficherLePanier();
+                                                reductionPrix();
+                                                netaPayer();
+
+                                        }
+                                });
+                                //incrementer via le bouton plus.
+                                increaseButtons[i].addEventListener('click', () => {
+                                        currentQuantity = increment[i].textContent;
+                                        currentProduct = nomduProduit[i].textContent;
+
+                                        produitsPanier[currentProduct].quantity += 1;
+                                        panierNumbers(produitsPanier[currentProduct]);
+                                        totalPrix(produitsPanier[currentProduct]);
+                                        localStorage.setItem('PanierOfProducts', JSON.stringify(produitsPanier));
+                                        afficherLePanier();
+                                        reductionPrix();
+                                        netaPayer();
 
                                 });
-
-
                         }
                 }
 
 
-
-                // change quantity of an article, and get the button ids
-                let btnPlus = document.getElementsByClassName('btnPlus');
-
-                console.log(btnPlus);
-
-                for (let i = 0; i < btnPlus.length; i++) {
-                        console.log(product[i].nomProduit);
-                        btnPlus[i].addEventListener('click', () => {
-                                console.log("click btnPlus");
-                        });
-
-                }
-
-
-
-
-
-
-
-                let btnMinus = document.getElementsByClassName('btnMinus');
-
-
-                console.log(btnMinus);
-                for (let i = 0; i < btnMinus.length; i++) {
-                        btnMinus[i].addEventListener('click', () => {
-                                console.log("cliked minus");
-
-                        });
-
-                }
-
-
-                // ==================================================================================================
-
-
+                //exécuter mes functions ici.
                 loadNumberOfProducts();
-                loadTotalOfProducts();
+                afficherLePanier();
+                loadTotalOfProducts()
                 reductionPrix();
                 netaPayer();
-
-                //remove from Cart
-                removeFromPanier()
-
-                //increase / decrease
 
 
         });
